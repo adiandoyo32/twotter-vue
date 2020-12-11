@@ -1,26 +1,58 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="nav">
+    <nav>
+      <router-link to="/">
+        <div class="navigation__logo">Twotter</div>
+      </router-link>
+
+      <div class="navigation__user" v-if="user">
+        {{ user.username }}
+      </div>
+    </nav>
+  </div>
+  <router-view />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { useStore } from "vuex";
+import { computed } from 'vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+
+  setup() {
+    const store = useStore();
+    const user = computed(() => store.state.User.user);
+
+    return {
+      user
+    };
+  },
+};
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 20px;
+    color: #42b983;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
