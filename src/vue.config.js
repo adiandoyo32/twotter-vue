@@ -5,5 +5,6 @@ module.exports = {
                 additionalData: '@import "@/styles/base.scss";'
             }
         }
-    }
+    },
+    runtimeCompiler: true,
 }
